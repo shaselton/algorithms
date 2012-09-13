@@ -3,7 +3,6 @@
  * @reference Introductions to Algorithms 2nd ed, page 17
  * @param arrayToSort
  * The runtime of this basic sorting algorithm is O(Cn^2) where C = constant.
- * @note (awesome file name...)
  */
 
 
@@ -22,12 +21,9 @@ var InsertionSort = function( arrayToSort ){
 		}
 		sortedArray[ i + 1 ] = key;
 	}	
+
 	return sortedArray;
 }
 
-var unsortedArray = [2,1,6,3,4,10,1,4,1,5,76,4,3,2,5,6,6,3,23,7,3,5,1,67,28,5,3,12,5];
 
-var sortedArray = new InsertionSort( unsortedArray );
-
-console.log( unsortedArray, sortedArray );
 
