@@ -56,17 +56,25 @@ var Merge = function( Arr, p, q, r, k ){
  */
 var MergeInsertSort = function( Arr, p, r, k ){
 
-	var q;
+	var q,
+		tempArr = [];
 	if( p < r ){
 		q = Math.floor( ( p + r ) / 2 );
-		console.log("q",q);
-		if( k < q ){ // do we want to use the insert sort when we're done splittin' the arrays?
+		console.log("q",q, "r", r, "p", p);
+		if( k < (q - p) ){ // do we want to use the insert sort when we're done splittin' the arrays?
 			console.log("merging sorting");
 			MergeInsertSort( Arr, p, q, k  );
-			MergeInsertSort( Arr, q + 1, r, k );			
+			MergeInsertSort( Arr, q + 1, r, k );		
+			console.log( Arr );
 		}else{
-			console.log("insert sorting at: ", q);
-			Arr = InsertionSort( Arr.slice( (p-1), k ) );
+			console.log( "tempArr", tempArr, "Arr", Arr );
+			tempArr = InsertionSort( Arr.slice( (p-1), k ) );
+			for( var i = 0, len = tempArr.length; i < len; i++ ){
+				Arr.splice( p - 1 + i, 1, tempArr[i] );
+			}
+			//Arr.splice( p - 1, k, InsertionSort( Arr.slice( (p-1), k ) ) );
+			
+			console.log("insert sorting at: ", q, "Arr", Arr, "Arr.slice( (p-1), k )", Arr.slice( (p-1), k ), "tempArr", tempArr);
 		}
 		Merge( Arr, p, q, r, k );		
 	}
