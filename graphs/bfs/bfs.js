@@ -40,9 +40,10 @@ var BFS_ADJACENCY = function( Graph, size ){
 	}
 
 	queue.push( nodes[0] ); // line 9
-
+	console.log( 'current queue', queue );
 	while( queue.length > 0 ){ // line 10
 		var node = queue.pop(); // line 11
+		console.log( 'queue pop(), current queue', queue, node );
 		for( var i = 0, len = node.adjNodeValues.length; i < len; i++ ){ // 12
 			console.log( 'scanning near by nodes!', node.adjNodeValues[i], nodes[node.adjNodeValues[i]] );
 			if( nodes[node.adjNodeValues[i]].color === WHITE ){ // 13
@@ -51,10 +52,11 @@ var BFS_ADJACENCY = function( Graph, size ){
 				nodes[node.adjNodeValues[i]].predecssor = node; // 16
 				console.log( 'new node found! Changing colors to GRAY', nodes[node.adjNodeValues[i]].value, nodes[node.adjNodeValues[i]] );
 				console.log( 'queue entry!' );
-				queue.push( nodes[node.adjNodeValues[i]] ); // 17
+				queue.unshift( nodes[node.adjNodeValues[i]] ); // 17
+				console.log( 'current queue', queue );
 			}
 		}
-		console.log( 'current node search finished! Turn to BLACK', node.value, node );
+		console.log( 'current node search finished! Turn to BLACK', node );
 		node.color = BLACK; // 18
 	}
 
