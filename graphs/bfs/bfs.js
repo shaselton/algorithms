@@ -1,18 +1,23 @@
 /**
  * @implementer shaselton
  * @reference Introductions to Algorithms 2nd ed, page 532
- * @param [Graph]
- * The runtime of this basic sorting algorithm is O(Cn^2) where C = constant.
+ * @param [Graph] represented in an adjacency list 
  */
+
+var GRAPH_SPEED = 1000,
+	j = 0,
+	createNodes;
 
 'use strict';
 
 var WHITE = 0, GRAY = 1, BLACK = 2;
 
-var BFS_ADJACENCY = function( Graph, size ){
+var BFS_ADJACENCY = function( Graph ){
 	var nodes = [],
 		queue = []; // line 8
 
+	console.warn( 'STARTING A NEW TRAVERSAL' );
+	console.time( "time" );
 	/**
 	 * lines 1-4 pg. 532
 	 */
@@ -26,6 +31,9 @@ var BFS_ADJACENCY = function( Graph, size ){
 		};
 		console.log( 'new node added!', nodes[i] );
 	};
+
+
+	//createNodes = setInterval('drawNodes(nodes)', GRAPH_SPEED);
 
 	/**
 	 * initialize
@@ -60,7 +68,23 @@ var BFS_ADJACENCY = function( Graph, size ){
 		node.color = BLACK; // 18
 	}
 
+	console.timeEnd( "time" );
+
 };
 
-var adjacencyList = [ [1, 4], [0, 4, 2, 3], [1, 3], [1, 4, 2], [3, 0, 1] ];
-BFS_ADJACENCY( adjacencyList );
+var drawNodes = function( nodes ){
+	var html_node = document.createElement('div');
+	if( nodes.length > j ){
+		html_node.className = 'node';
+		html_node.innerHtml = nodes[j].value;
+		document.querySelector('.board').appendChild(html_node);
+		++j;
+	}else{
+		clearInterval(createNodes);
+	}
+};
+
+var adjacencyUndirectedList = [ [1, 4], [0, 4, 2, 3], [1, 3], [1, 4, 2], [3, 0, 1] ],
+	adjacencyDirectedList = [ [1, 3], [4], [5, 4], [1], [3], [5] ];
+BFS_ADJACENCY( adjacencyUndirectedList );
+BFS_ADJACENCY( adjacencyDirectedList );
