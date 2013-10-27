@@ -61,6 +61,8 @@ var DFS_VISIT = function( node, nodes ){
 };
 
 var adjacencyUndirectedList = [ [1, 4], [0, 4, 2, 3], [1, 3], [1, 4, 2], [3, 0, 1] ],
+	twoRootedjacencyUndirectedList = [ [1, 4], [0, 4, 2, 3], [1, 3], [1, 4, 2], [3, 0, 1], [5] ],
 	adjacencyDirectedList = [ [1, 3], [4], [5, 4], [1], [3], [5] ];
 DFS_ADJACENCY( adjacencyUndirectedList );
+DFS_ADJACENCY( twoRootedjacencyUndirectedList );
 DFS_ADJACENCY( adjacencyDirectedList );
