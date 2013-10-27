@@ -1,0 +1,13 @@
+.node{
+	background-color: #fff;
+	border: 1px solid #000;
+	border-radius: 50%;
+	height: 20px;
+	width: 20px;
+	margin-right: 20px;
+	float: left;
+}
+
+.node.gray{
+	background-color: #ccc;
+}
