@@ -60,7 +60,9 @@ Sample input       Sample Output
 				if( isNaN( startPoint ) || isNaN( endPoint ) ){
 					return false;
 				}
+				console.time("non-worker");
 				var results = solution( startPoint, endPoint );
+				console.timeEnd("non-worker");
 				result.value = startPoint + " " + endPoint + " " + results[0];
 				console.log( results );
 			}
@@ -78,7 +80,6 @@ Sample input       Sample Output
 
 		function compute( startPoint ){
 			count++;
-			console.log(startPoint, count);
 			sequence.push( startPoint );
 			if( 1 === startPoint ){
 				return count;

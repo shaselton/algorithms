@@ -63,9 +63,13 @@ Sample input       Sample Output
 				if( isNaN( startPoint ) || isNaN( endPoint ) ){
 					return false;
 				}
+				console.time("with-worker");
+
+				// promise of when the total calcualtion will be completed
 				pSolution = solution( startPoint, endPoint );
 				pSolution.then( function( err, result ){
 					output.value = startPoint + " " + endPoint + " " + result[0];
+					console.timeEnd("with-worker");
 				});
 				console.log( results );
 			}
@@ -78,8 +82,8 @@ Sample input       Sample Output
 			log = [],
 			workers = [],
 			currentValue = 0,
-			pSolution = new promise.Promise()
-			pr = new promise.Promise(),
+			pSolution = new promise.Promise(), // promise to be returned and ultimately resolved
+			pr = new promise.Promise(), // array of promises to hold each of the web workers
 			promiseCount = 0; // to ensure that we collect all of the promises before returning the promise of the total results
 			
 
