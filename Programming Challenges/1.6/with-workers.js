@@ -63,6 +63,7 @@ Sample input       Sample Output
 				if( isNaN( startPoint ) || isNaN( endPoint ) ){
 					return false;
 				}
+				console.profile("profile-worker");
 				console.time("with-worker");
 
 				// promise of when the total calcualtion will be completed
@@ -70,8 +71,8 @@ Sample input       Sample Output
 				pSolution.then( function( err, result ){
 					output.value = startPoint + " " + endPoint + " " + result[0];
 					console.timeEnd("with-worker");
+					console.profileEnd("profile-worker");
 				});
-				console.log( results );
 			}
 		}
 	};

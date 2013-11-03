@@ -60,9 +60,11 @@ Sample input       Sample Output
 				if( isNaN( startPoint ) || isNaN( endPoint ) ){
 					return false;
 				}
+				console.profile("profile-worker");
 				console.time("non-worker");
 				var results = solution( startPoint, endPoint );
 				console.timeEnd("non-worker");
+				console.profileEnd("profile-worker");
 				result.value = startPoint + " " + endPoint + " " + results[0];
 				console.log( results );
 			}
