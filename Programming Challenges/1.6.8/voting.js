@@ -42,11 +42,6 @@ John Doe
 			lowest = Infinity;
 
 
-		/**
-		 * TODO: this method of removing candidates isn't the greatest.
-		 * It could produce unexpected results if there happens to be candidates
-		 * with the same name...  
-		 */
 		function removeCandidate( candidateIndex ){
 			for( var j = 0, len = votes.length; j < len; j++ ){
 				for( var i = 0, candidateLength = candidate.length; i < candidateLength; i++ ){
@@ -67,8 +62,6 @@ John Doe
 		for( var i = 0, len = votes.length; i < len; i++ ){
 			totals[(votes[i][0]-1)] += 1;
 		}
-
-		console.log(totals);
 
 		//check for 50% (and look for the lowest if 50% isn't determined)
 		for( var i = 0, len = candidate.length; i < len; i++ ){
@@ -93,6 +86,6 @@ John Doe
 		return voting( candidate, votes );
 
 	};
-	console.log(voting(['scott', 'erin', 'traci'], [[3,2,1],[2,1,3],[3,2,1],[2,1,3],[1,2,3]]  ));
+	console.log(voting(['John Doe', 'Jane Smith', 'Jane Austen'], [[1,2,3],[2,1,3],[2,3,1],[1,2,3],[3,1,2]] ));
 
 })();
