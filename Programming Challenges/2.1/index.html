@@ -1,15 +1,6 @@
 <!doctype html>
 <html>
 	<head>
-		<style type="text/css">
-		.not-active{
-			display: none;
-		}
-
-		.students label{
-			display: block;
-		}
-		</style>
 		<title>Carry</title>
 	</head>
 	<body ng-app="programmingChallenges">
@@ -18,24 +9,8 @@
 			<div ng-repeat="number in numbers">
 				<carry-pair></carry-pair>
 			</div>
-			<button ng-click="addTestCase()">Add another case</button>
-			
+			<button ng-click="addTestCase()">Add another case</button>			
 		</div>
-
-
-		<div class="student-breakdown not-active">
-
-			<div class="students">
-
-			</div>
-
-			<button class="expenses">
-				submit expenses</div>
-
-		</div>
-
-
-		
 
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.js"></script>
 		<script src="arithmetic.js"></script>

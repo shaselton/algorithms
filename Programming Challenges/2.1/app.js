@@ -34,13 +34,17 @@ No carry operation.
 			$scope.numbers.push({});
 		}
 	}])
+	/**
+	 * TODO: pull out and put into generic code base?
+	 * TODO: testing of exceptions
+	 */
 	.service( 'exceptions', [ function(){
 
 		function notANumberException( value ){
 			this.value = value;
 			this.message = "Please enter an int";
 			this.toString = function(){
-				return this.value + ". " + this.message;
+				return "you didn't enter a corrent number type: " + this.value + ". " + this.message;
 			}
 		};
 
@@ -51,6 +55,8 @@ No carry operation.
 			processException: function( exception ){
 				if( exception instanceof notANumberException ){
 					console.error(exception.toString());
+				}else{
+					console.error(exception);
 				}
 			}
 		}
@@ -58,6 +64,15 @@ No carry operation.
 	.service( 'carryService',  [ 'exceptions', function( exceptions ){
 
 		var carry = function( firstNumber, secondNumber ){
+			var first,
+				second,
+				digit,
+				result = [],
+				carryCount = 0,
+				carryAmount = 0;
+
+			console.time('carry');
+
 			if( isNaN( parseInt( firstNumber, 10 ) ) || isNaN( parseInt( secondNumber, 10 ) ) ){
 				if( isNaN( parseInt( firstNumber, 10 ) ) ){
 					throw exceptions.notANumberException( firstNumber );
@@ -65,6 +80,32 @@ No carry operation.
 					throw exceptions.notANumberException( secondNumber );
 				}
 			}
+
+			first = parseInt(firstNumber, 10).toString().split('');
+			second = parseInt(secondNumber, 10).toString().split('');
+
+			first.reverse();
+			second.reverse();
+
+			for( var i = 0, len = Math.max( first.length, second.length ); i < len; i++ ){
+				firstNumber = first[i] || 0;
+				secondNumber = second[i] || 0;
+				digit = parseInt( firstNumber, 10 ) + parseInt( secondNumber, 10 ) + carryAmount;
+				carryAmount = 0;
+				if( digit >= 10 ){ // carry the digit
+					result[i] = (digit % 10) + carryAmount;
+					carryCount++;
+					carryAmount += Math.floor( digit/10 ); // technically, this isn't necessary, but more flexible if carryAmounts was tracking multiplication
+				}else{
+					result[i] = digit;
+				}
+			}
+			if( carryAmount > 0 ){
+				result[result.length] = carryAmount;
+			}
+
+			console.timeEnd('carry');
+			return [carryCount, parseInt( result.reverse().join('') )];
 		};
 
 		return{
@@ -77,12 +118,29 @@ No carry operation.
 			}
 		}
 	}])
+	.filter( 'carryAmount', [function(){
+		return function( amount ){
+			if( !angular.isNumber( amount ) ){
+				return '';
+			}
+			if( amount === 0 ){
+				return 'No carry operation.';
+			}else if( amount === 1 ){
+				return amount + ' carry operation.';
+			}else{
+				return amount + ' carry operations.';
+			}
+		};
+	}])
 	.directive( 'carryPair', [ function(){
 		return{
 			restrict: 'E',
 			controller:['$scope', '$element', 'carryService', function($scope, $element, carryService){
 				$scope.calculateCarry = function(){
-					$scope.output = carryService.carry( $scope.firstNumber, $scope.secondNumber );
+					var result
+					result = carryService.carry( $scope.firstNumber.trim(), $scope.secondNumber.trim() );
+					$scope.output = result[0];
+					$scope.total = result[1];
 				}
 			}],
 			link: function(scope, element){
@@ -95,7 +153,7 @@ No carry operation.
 				});
 			},
 			scope:{},
-			template: '<div><input ng-model="firstNumber" type="text"/><input ng-model="secondNumber" type="text"> <span>{{output}}</span></div>'
+			template: '<div><input ng-model="firstNumber" type="text"/><input ng-model="secondNumber" type="text"> <span>{{output | carryAmount}} {{total}}</span></div>'
 		};
 	}]);
 
