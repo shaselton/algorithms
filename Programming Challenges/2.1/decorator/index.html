@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Carry</title>
+	</head>
+	<body ng-app="programmingChallenges">
+		
+		<div class="total-numbers" ng-controller="shaselton">
+			<div ng-repeat="number in numbers">
+				<carry-pair></carry-pair>
+			</div>
+			<button ng-click="addTestCase()">Add another case</button>			
+		</div>
+
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.js"></script>
+		<script src="app.js"></script>
+	</body>
+</html>

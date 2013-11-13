@@ -28,53 +28,55 @@ No carry operation.
 	'use strict';
 
 	angular.module( 'programmingChallenges', [] )
-	.config(function($provide){
-		$provide.decorator("$exceptionHandler", function($delegate){
 
-			function notANumberException( value ){
-				this.value = value;
-				this.message = "Please enter an int";
-				this.toString = function(){
-					return "you didn't enter a corrent number type: " + this.value + ". " + this.message;
+	.provider( 'exceptions', function(){
+		var that = this;
+		this.notANumberException = function( value ){
+			this.value = value;
+			this.message = "Please enter an int";
+			this.toString = function(){
+				return "you didn't enter a corrent number type: " + this.value + ". " + this.message;
+			}
+		};
+
+		this.processException = function( exception ){
+			if( exception instanceof that.notANumberException ){
+				console.error(exception.toString());
+			}else{
+				console.error(exception);
+			}
+		};
+
+		this.$get = function(){
+			return {
+				notANumberExceptionCall: function( value ){
+					return new that.notANumberException( value );
 				}
-			};
+			}
+		}
+	})
+
+
+	.config(function($provide, exceptionsProvider){
+
+		$provide.decorator("$exceptionHandler", function($delegate, exceptions){
 
 			return function(exception, cause){
+				exceptionsProvider.processException( exception );
 				$delegate(exception, cause);
-				console.log(arguments, 'im here');
 			}
 		});
 
 
-
 	})
+
 	.controller( 'shaselton', [ '$scope', function( $scope ){
 		$scope.numbers = new Array(1);
 		$scope.addTestCase = function(){
 			$scope.numbers.push({});
 		}
 	}])
-	/**
-	 * TODO: pull out and put into generic code base?
-	 * TODO: testing of exceptions
-	 */
-	.service( 'exceptions', [ function(){
-
-		
-
-		return{
-			notANumberException: function( value ){
-				return new notANumberException( value );
-			},
-			processException: function( exception ){
-				if( exception instanceof notANumberException ){
-					console.error(exception.toString());
-				}else{
-					console.error(exception);
-				}
-			}
-		}
-	}])
+	
 	.service( 'carryService',  [ 'exceptions', function( exceptions ){
 
 		var carry = function( firstNumber, secondNumber ){
@@ -89,9 +91,9 @@ No carry operation.
 
 			if( isNaN( parseInt( firstNumber, 10 ) ) || isNaN( parseInt( secondNumber, 10 ) ) ){
 				if( isNaN( parseInt( firstNumber, 10 ) ) ){
-					throw exceptions.notANumberException( firstNumber );
+					throw exceptions.notANumberExceptionCall( firstNumber );
 				}else{
-					throw exceptions.notANumberException( secondNumber );
+					throw exceptions.notANumberExceptionCall( secondNumber );
 				}
 			}
 
@@ -127,7 +129,7 @@ No carry operation.
 				try{
 					return carry( firstNumber, secondNumber );
 				}catch( exception ){
-					exceptions.processException( exception );
+					throw exception;
 				}
 			}
 		}
