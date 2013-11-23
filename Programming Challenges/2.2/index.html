@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Light, more light</title>
+	</head>
+	<body ng-app="programmingChallenges">
+		
+		<div class="total-numbers" ng-controller="shaselton">
+			<div ng-repeat="number in numbers">
+				<lights></lights>
+			</div>
+			<button ng-click="addTestCase()">Add another case</button>			
+		</div>
+
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.js"></script>
+		<script src="app.js"></script>
+		<script src="../providers/exceptions.js"></script>
+	</body>
+</html>

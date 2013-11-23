@@ -1,0 +1,1 @@
+(function(f,h){for(var d=0,g=f.length;d<g;d++){for(var c=f[d],e=Array.apply(null,Array(c)).map(Boolean.prototype.valueOf,!0),a=void 0,a=2;a<=c;a++)for(var b=a;b<=c;b*=a)e[b-1]=!e[b-1];a=e.pop();console.log(c,a?"yes":"off");}})([1,2,8250,3910,1930,256,1321,8447,1969,6241,6444,4926,3845,9583],document);
