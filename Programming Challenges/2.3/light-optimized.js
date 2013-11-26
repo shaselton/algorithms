@@ -19,9 +19,9 @@
 	};
 
 	for( var i = 0, len = n.length; i < len; i++ ){
-		console.time('light2');
+		//console.time('light2');
 		light( n[i] );
-		console.timeEnd('light2');
+		//console.timeEnd('light2');
 	}
 
 

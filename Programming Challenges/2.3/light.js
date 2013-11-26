@@ -21,9 +21,9 @@
 	};
 
 	for( var i = 0, len = n.length; i < len; i++ ){
-		console.time('light');
+		//console.time('light');
 		light( n[i] );
-		console.timeEnd('light');
+		//console.timeEnd('light');
 	}
 
 
