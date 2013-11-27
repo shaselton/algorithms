@@ -18,6 +18,8 @@ struct node{
 struct node *generateNode();
 void addNodeToGraph( struct node *, struct node *);
 void printInOrder( struct node * );
+void printPreOrder( struct node * );
+void printPostOrder( struct node * );
 
 int main (int argc, const char * argv[])
 {   
@@ -32,7 +34,18 @@ int main (int argc, const char * argv[])
         addNodeToGraph( rootNode, newNode );
     }
     
+    printf("root node value %d\n", rootNode->value);
+    
+    printf("in order\n");
     printInOrder(rootNode);
+    printf("\n");
+    
+    printf("pre order\n");
+    printPreOrder(rootNode);
+    printf("\n");
+    
+    printf("post order\n");
+    printPostOrder(rootNode);
     
     return 0;
 }
@@ -40,11 +53,29 @@ int main (int argc, const char * argv[])
 void printInOrder( struct node *root ){
     if( NULL != root ){
         printInOrder(root->leftSubtree);
-        printf("%p : %d\n", root, root->value);
+        printf("%d\t", root->value);
         printInOrder(root->rightSubtree);
     }
 }
     
+
+void printPreOrder( struct node *root ){
+    if( NULL != root ){
+        printf("%d\t", root->value);
+        printInOrder(root->leftSubtree);
+        printInOrder(root->rightSubtree);
+    }
+}
+
+
+void printPostOrder( struct node *root ){
+    if( NULL != root ){
+        printInOrder(root->leftSubtree);
+        printInOrder(root->rightSubtree);
+        printf("%d\n", root->value);
+    }
+}
+
 void addNodeToGraph( struct node *root, struct node *newNode ){
     //printf("new node added %d\n", newNode->value);
     if( root->value <= newNode->value ){
