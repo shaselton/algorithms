@@ -17,7 +17,9 @@ int main (int argc, const char * argv[])
     install("Scott", "Haselton1"); // overwrites
     install("Harrison", "Spain");
     install("Erin", "Spain");
-    install("Erin", "Haselton"); // overwrites
+    undef("Erin"); //removes
+    install("Erin", "Haselton");    
+    install("Erin", "Spain");
     return 0;
 }
 

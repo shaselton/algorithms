@@ -51,4 +51,26 @@ struct hash * install(char *key, char *value){
     }
     
     return temp;
-}
+};
+
+void undef(char *key){
+    struct hash *removeLocation = lookup(key);
+    struct hash *temp;
+    
+    if( removeLocation != NULL ){
+        printf("removing node: %s with value: %s\n", removeLocation->key, removeLocation->value);
+       // possibly reassign nodes that are linked with the node to be deleted
+        if (removeLocation->next != NULL){
+            printf("reassign node: %s\n", removeLocation->next->key);
+            temp = removeLocation->next;
+            removeLocation->key = removeLocation->next->key;
+            removeLocation->value = removeLocation->next->value;
+            removeLocation->next = temp->next;
+            free(temp);
+        }else{
+            free(removeLocation->key);
+            free(removeLocation->value);
+            free(removeLocation->next);
+        }
+    }
+};

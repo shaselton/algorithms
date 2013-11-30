@@ -10,7 +10,7 @@
 
 // this should be a prime number to allow for even distribution into the hash table.
 // NOTE: an easy way to testing the 'chaining' part of this code is to make the HASH_SIZE smaller...e.g. 3.
-#define HASH_SIZE 101
+#define HASH_SIZE 3
 
 // linked list structure
 struct hash{
@@ -20,7 +20,7 @@ struct hash{
 };
 
 // this actual structure that will manage the hashs.  a pointer table of type 'hash'
-struct hash *hashtable[HASH_SIZE];
+static struct hash *hashtable[HASH_SIZE];
 
 // generate a hash number that will be used to insert into the hashtable
 unsigned hash(char *);
@@ -32,5 +32,9 @@ struct hash *lookup(char *);
 // the new value will overwrite the old one.  Otherwise, a new entry is created.  Will return NULL
 // if there is no more room for the entry.
 struct hash *install(char *, char *);
+
+
+// uses lookup to determine whether the key being removed is in memory.
+void undef(char *);
 
 #endif
