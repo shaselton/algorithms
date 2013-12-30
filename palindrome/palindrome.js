@@ -21,4 +21,22 @@ String.prototype.largestPalindrome = function(){
 	}
 
 	return largestWord;
-}
+};
+
+String.prototype.betterLargestPalindrome = function(){
+	var words = this.toString().split(' '),
+		isPalindrome = function( word ){
+			return word === word.split('').reverse().join('');
+		},
+		largestWordCount = 0,
+		largestWord = "";
+
+	for( word in words ){
+		if( words[word].length > largestWordCount && isPalindrome( words[word] ) ){
+			largestWord = words[word];
+			largestWordCount = words[word].length;
+		}
+	}
+
+	return largestWord;
+};
