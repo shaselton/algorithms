@@ -2,6 +2,12 @@
 	<script src='adjacency-list.js'></script>
 	<script src='../bfs/bfs_algorithm_design.js'></script>
 	<script>
+		var newGraph = graph.readGraph( [8, [1,2], [1,3], [1,4], [1,5], [1,6], [1,7]], true );
+		bfs.twoColor( newGraph );
+
+		var newGraph = graph.readGraph( [8, [1,2], [1,3], [1,4], [1,5], [1,6], [1,7]], true );
+		bfs.search( newGraph, 1 );
+
 		var newGraph = graph.readGraph( [8, [1,2], [1,3], [1,4], [1,5], [1,6], [1,7], [2,7]], true );
 		bfs.connectedComponents( newGraph );
 		
