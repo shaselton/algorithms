@@ -1,3 +1,19 @@
+/**
+ * Notes on why to use adjacency lists vs matrices (most of the time)
+ * Reference can be found on pg 152 in 'The Algorithm Design Manual'
+ * --------------------------------------------------------------------------------------
+ * Faster to test if (x,y) is in graph?    	|	adjacency matrices
+ * Faster to find the degree of a vertex?	|	adjacency list
+ * Less memory on small graphs?				|	adjacency lists (m+n) va (n^2)
+ * Less memory on big graphs?				|	adjacency matrices (a small win)
+ * Edge insertion or deletion?				|	adjacency matrices O(1) vs. O(d)
+ * Faster to traverse the graph?			|	adjacency lists Omega(m+n) vs Omega(n^2)
+ * Better for most problems?				|	adjacency lists
+ * --------------------------------------------------------------------------------------
+ */
+
+
+
 var graph = {};
 /**
  * More of a C implementation with passing "graph" into the argument list
