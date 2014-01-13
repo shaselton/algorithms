@@ -12,7 +12,21 @@
  * --------------------------------------------------------------------------------------
  */
 
+/**
+ * not really needed...  Could use if implementing in C, struct
+ */
+function EdgeNode( ){
+	this.y = null; 		// adjacency info
+	this.weight = null;	// weight of the edge, if there
+};
 
+function Graph() {
+	this.edges = [];		//adjacency info
+	this.degree = [];		//outdegree of each vertex
+	this.nVertices = null;	//number of vertices in graph
+	this.nEdges = null;		//number of edges in graph
+	this.directed = false;	//is the graph directed?
+};
 
 var graph = {};
 /**
@@ -22,23 +36,7 @@ var graph = {};
  */
 ;(function( g ){
 	'use strict';
-
-	/**
-	 * not really needed...  Could use if implementing in C, struct
-	 */
-	function EdgeNode( ){
-		this.y = null; 		// adjacency info
-		this.weight = null;	// weight of the edge, if there
-	};
-
-	function Graph() {
-		this.edges = [];		//adjacency info
-		this.degree = [];		//outdegree of each vertex
-		this.nVertices = null;	//number of vertices in graph
-		this.nEdges = null;		//number of edges in graph
-		this.directed = false;	//is the graph directed?
-	};
-
+	
 	g.initialize = function( graph, directed, nodes, edges ){
 
 		graph.nVertices = nodes;
@@ -108,8 +106,7 @@ var graph = {};
 
 	};
 
+
 })( graph );
 
-var newGraph = graph.readGraph( [8, [1,2], [1,3], [1,4], [1,5], [1,6], [1,7], [1,8]], true );
-graph.printGraph( newGraph );
 
