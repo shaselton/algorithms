@@ -59,6 +59,10 @@ var bfs = {};
 		}
 
 		this.isInitialized = false;
+
+		this.processEdge = function( currentVertex, successorVertex ){
+			console.log('processed edge: ', currentVertex, successorVertex);
+		};
 	};
 
 	b.processVertexEarly = function( vertex ){
