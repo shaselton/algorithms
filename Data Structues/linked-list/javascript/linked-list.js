@@ -37,7 +37,31 @@ var shaselton = {};
         }
 
         _length++;
-      }  
+      },
+      remove: function(index){
+        var position = 0,
+            prev = null,
+            current = _head;
+
+        if(index > -1 && index < _length){
+          if(0 === index){
+            _head = current.getNext();
+          }else{
+            while(++position !== index){
+              prev = current;
+              current = current.getNext();
+            };
+            
+            prev.next(current.getNext());
+          }
+
+          _length--;
+
+          return current;
+        }else{
+          return null;
+        }
+      }
     }
   };
 })(shaselton);
