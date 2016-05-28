@@ -61,6 +61,19 @@ var shaselton = {};
         }else{
           return null;
         }
+      },
+      item: function(index){
+        var position = 0,
+            current = _head;
+
+        if(index > -1 && index < _length){
+          while(position++ !== index){
+            current = current.getNext();
+          }
+          return current;
+        }else{
+          return null;
+        }
       }
     }
   };
