@@ -18,27 +18,25 @@ var shaselton = {};
 
   s.list = function LinkedList(){
     var _length = 0,
-        _head = null;
+        _head = null,
+        _tail = null;
 
     return{
-      add: function(data){
-        var current,
-            node = s.node(data);
+      add: function(data){ // O(1)
+        var node = s.node(data);
 
         if(null === _head){
           _head = node;
+          _tail = node;
         }else{
-          current = _head;
-          while(null !== current.getNext()){ // O(n)
-            current = current.getNext();
-          };
-
-          current.next(node);
+          _tail.next(node);
+          _tail = node;
         }
 
         _length++;
+        return _tail.getData;
       },
-      remove: function(index){
+      remove: function(index){ // O(n)
         var position = 0,
             prev = null,
             current = _head;
