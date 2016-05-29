@@ -17,9 +17,9 @@ var shaselton = {};
   };
 
   s.list = function LinkedList(){
-    var _length = 0,
-        _head = null,
-        _tail = null;
+    var _head = null,
+        _tail = null,
+        _length = 0;
 
     return{
       add: function(data){ // O(1)
@@ -32,13 +32,11 @@ var shaselton = {};
           _tail.next(node);
           _tail = node;
         }
-
         _length++;
         return _tail.getData;
       },
       remove: function(data){ // O(n)
-        var position = 0,
-            prev = _head,
+        var prev = _head,
             current = _head;
 
         if(current === null){
@@ -66,6 +64,36 @@ var shaselton = {};
           }
           return null;
         }
+      },
+      reverse: function(){
+        var current = _head,
+            prev = null,
+            next = null;
+
+        _tail = _head;
+        while(current !== null){
+          next = current.getNext();
+          current.next(prev);
+          prev = current;
+          current = next;
+        }
+        _head = prev;
+      },
+      recursiveReverse: function(current = _head, prev = null){
+        var next = null;
+
+        if(current === null){
+          _head = prev;
+          return;
+        }
+
+        if(prev === null){
+          _tail = current;
+        }
+
+        next = current.getNext();
+        current.next(prev);
+        this.recursiveReverse(next, current);
       },
       item: function(index){
         var position = 0,
