@@ -36,27 +36,34 @@ var shaselton = {};
         _length++;
         return _tail.getData;
       },
-      remove: function(index){ // O(n)
+      remove: function(data){ // O(n)
         var position = 0,
-            prev = null,
+            prev = _head,
             current = _head;
 
-        if(index > -1 && index < _length){
-          if(0 === index){
-            _head = current.getNext();
-          }else{
-            while(++position !== index){
-              prev = current;
-              current = current.getNext();
-            };
-            
-            prev.next(current.getNext());
+        if(current === null){
+          return null;
+        }
+
+        if(current.getData === data){
+          _head = current.getNext();
+          if(_tail.getData === data){
+            _tail = _head;
           }
-
-          _length--;
-
           return current;
         }else{
+          while(current !== null){
+            if(current.getData === data){
+              prev.next(current.getNext());
+              if(prev.getNext() === null){
+                _tail = prev;
+              }
+              return current;
+              break;
+            }
+            prev = current;
+            current = current.getNext();
+          }
           return null;
         }
       },
