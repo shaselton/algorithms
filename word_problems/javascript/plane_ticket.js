@@ -35,5 +35,28 @@ function businessTrip(tickets){
   return [ticketStart, ticketEnd];
 }
 
+function getTripEndpoints(arr) {
+    var endPoints = {},
+        rdep, rdest;
+
+    arr.forEach(function (ticket) {
+        var dep = ticket[0],
+            dest = ticket[1];
+        if (endPoints[dep]) {
+            delete endPoints[dep];
+        } else {
+            endPoints[dep] = dep;
+            rdep = dep;
+        }
+        if (endPoints[dest]) {
+            delete endPoints[dest];
+        } else {
+            endPoints[dest] = dest;
+            rdest = dest;
+        }
+    });
+    return [rdep, rdest];
+}
+
 // expect(businessTrip([[1,2], [2,3], [3,4]])).toBe([1,4]);
 // expect(businessTrip([[2,3], [3,4], [1,2]])).toBe([1,4]);
