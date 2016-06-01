@@ -2,6 +2,10 @@
 you are on a biz trip and travelling from one city to another. you have a stack of unsorted flight boarding passes. only departure city and destination city are on the boarding pass. how do you find the first departure city and your final destination city, write the solution in javascript.
 **/
 
+/**
+  NOTE: this function really calls for the "the relative complement" of two sets.  So, this would look like ticketStart = startLocation - endingLocation
+*/
+
 function businessTrip(tickets){
   var startLocation = new Set(),
       endingLocation = new Set(),
